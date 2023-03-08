@@ -13,6 +13,7 @@ import hudson.model.Run.RunnerAbortedException;
 import hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy;
 import hudson.plugins.build_timeout.impl.ElasticTimeOutStrategy;
 import hudson.plugins.build_timeout.impl.LikelyStuckTimeOutStrategy;
+import hudson.plugins.build_timeout.impl.LikelyStuckWMinTimeOutStrategy;
 import hudson.plugins.build_timeout.operations.AbortOperation;
 import hudson.plugins.build_timeout.operations.FailOperation;
 import hudson.plugins.build_timeout.operations.WriteDescriptionOperation;
@@ -225,6 +226,8 @@ public class BuildTimeoutWrapper extends BuildWrapper {
                     3);
         } else if ("likelyStuck".equalsIgnoreCase(timeoutType)) {
             strategy = new LikelyStuckTimeOutStrategy();
+        } else if ("likelyStuckWMin".equalsIgnoreCase(timeoutType)) {
+            strategy = new LikelyStuckWMinTimeOutStrategy();
         } else if (strategy == null) {
             strategy = new AbsoluteTimeOutStrategy(timeoutMinutes);
         }
